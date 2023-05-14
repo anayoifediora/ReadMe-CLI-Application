@@ -5,8 +5,8 @@ const fs = require('fs');
 // TODO: Create an array of questions for user input
 // const questions = [];
 
-
-    inquirer.prompt([
+const promptUser = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'title',
@@ -61,57 +61,62 @@ const fs = require('fs');
             name: 'tests',
         }
     ])
-    
-    .then((response) => {
+};    
            
-         const generateReadMe = `
-# **${response.title}** 
+const generateReadMe = ({title, description, applink, contents, installation, usage, credits, license, contribution, tests}) => 
+`# **${title}** 
 ## Project Description
-${response.description}
-[A link to the webpage can be found here] (${response.applink})
+${description}
+## Link to Webpage
+[A link to the webpage can be found here] (${applink})
 ## Table of Contents
-- [${response.contents[0]}](#${response.contents[0].toLowerCase()})
-- [${response.contents[1]}](#${response.contents[1].toLowerCase()})
-- [${response.contents[2]}](#${response.contents[2].toLowerCase()})
-- [${response.contents[3]}](#${response.contents[3].toLowerCase()})
-- [${response.contents[4]}](#${response.contents[4].toLowerCase()})
-- [${response.contents[5]}](#${response.contents[5].toLowerCase()})
+- [${contents[0]}](#${contents[0].toLowerCase()})
+- [${contents[1]}](#${contents[1].toLowerCase()})
+- [${contents[2]}](#${contents[2].toLowerCase()})
+- [${contents[3]}](#${contents[3].toLowerCase()})
+- [${contents[4]}](#${contents[4].toLowerCase()})
+- [${contents[5]}](#${contents[5].toLowerCase()})
 
 ## Installation 
-${response.installation}
+${installation}
 ## Usage
-${response.usage}
+${usage}
 ## Credits
-${response.credits}
+${credits}
 ## License
-${response.license}
+${license} ${displayBadge(license)}
 ## Contributing
-${response.contribution}
+${contribution}
 ## Tests
-${response.tests}
-## Questions`
-
+${tests}
+## Questions`;
+const displayBadge = (license) =>  {
+    let mitLicense = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+    let boostLicense = '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)';
+    let iscLicense = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
+    let ibmLicense = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)';
     
-        fs.writeFile(`${response.title}.md`, generateReadMe, (err) =>
+    if (license === 'MIT License') {
+         return mitLicense
+    }  else if (license === 'Boost Software License') {
+        return boostLicense;
+    }  else if (license === 'ISC License') {
+        return iscLicense;
+    }  else if (license === 'IBM Public License Version 1.0') {
+        return ibmLicense;
+    } else 
+    return;
+}
+const init = () => {
+    promptUser()
+        .then((answers) => {
+        fs.writeFile(`${answers.title}.md`, generateReadMe(answers), (err) =>
           err ? console.log(err) : console.log('Successfully created Readme file')
         );
-    })
-// Function call to initialize app.
+        })
 
-// function displayBadge() {
-//     let mitLicense = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-//     let boostLicense = '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)';
-//     let iscLicense = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
-//     let ibmLicense = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)';
-    
-//     if (response.license === 'MIT License') {
-//         return mitLicense
-//     }  else if (response.license === 'Boost Software License') {
-//         return boostLicense;
-//     }  else if (response.license === 'ISC License') {
-//         return iscLicense;
-//     }  else if (response.license === 'IBM Public License Version 1.0') {
-//         return ibmLicense;
-//     } else 
-//     return;
-// }
+}
+
+
+
+init();
