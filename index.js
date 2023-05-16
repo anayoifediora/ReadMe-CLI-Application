@@ -3,9 +3,8 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // TODO: Create an array of questions for user input
-// const questions = [];
 
-const promptUser = () => {
+const questions = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -84,31 +83,31 @@ ${usage}
 ## Credits
 ${credits}
 ## License
-${license} ${displayBadge(license)}
+${license} 
 ## Contributing
 ${contribution}
 ## Tests
 ${tests}
 ## Questions`;
-const displayBadge = (license) =>  {
-    let mitLicense = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-    let boostLicense = '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)';
-    let iscLicense = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
-    let ibmLicense = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)';
+// const displayBadge = (license) =>  {
+//     let mitLicense = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+//     let boostLicense = '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)';
+//     let iscLicense = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
+//     let ibmLicense = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)';
     
-    if (license === 'MIT License') {
-         return mitLicense
-    }  else if (license === 'Boost Software License') {
-        return boostLicense;
-    }  else if (license === 'ISC License') {
-        return iscLicense;
-    }  else if (license === 'IBM Public License Version 1.0') {
-        return ibmLicense;
-    } else 
-    return;
-}
+//     if (license === 'MIT License') {
+//          return mitLicense
+//     }  else if (license === 'Boost Software License') {
+//         return boostLicense;
+//     }  else if (license === 'ISC License') {
+//         return iscLicense;
+//     }  else if (license === 'IBM Public License Version 1.0') {
+//         return ibmLicense;
+//     } else 
+//     return;
+// }
 const init = () => {
-    promptUser()
+    questions()
         .then((answers) => {
         fs.writeFile(`${answers.title}.md`, generateReadMe(answers), (err) =>
           err ? console.log(err) : console.log('Successfully created Readme file')
