@@ -64,11 +64,22 @@ const questions = () => {
             type: 'input',
             message: 'please provide examples/screenshots of how to test your application',
             name: 'tests',
-        }
+        },
+        {
+            type: 'input',
+            message: 'What is your github username?',
+            name: 'username',
+        },
+        {
+            type: 'input',
+            message: 'What is your e-mail address?',
+            name: 'email',
+        },
+
     ])
 };    
            
-const generateReadMe = ({title, description, applink, contents, installation, usage, credits, license, licenseBadge, contribution, tests}) => 
+const generateReadMe = ({title, description, applink, contents, installation, usage, credits, license, licenseBadge, contribution, tests, username, email}) => 
 `# **${title}** 
 ${displayBadge(licenseBadge)}
 ## Project Description
@@ -95,7 +106,9 @@ This project is licensed under the ${license}.
 ${contribution}
 ## Tests
 ${tests}
-## Questions`;
+## Questions
+Github username: ${username}\n
+Any questions? please contact me via e-mail at ${email}`;
 const displayBadge = (licenseBadge) =>  {
     if (licenseBadge !== "None") {
         return `[![License: MIT](https://img.shields.io/badge/${licenseBadge}.svg)](https://opensource.org/licenses/MIT)`
