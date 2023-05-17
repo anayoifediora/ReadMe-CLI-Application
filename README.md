@@ -7,7 +7,7 @@ Working on this project exposed me to several new concepts especially the signif
 
 ## Mock-up 
 The following link displays the functionality of the application:
-[Screencastify]()
+[Video link](https://drive.google.com/file/d/1Qnw4mzRQiGo_KQ0guPm-W0WqI6fSF9vq/view)
 
 ## Link to Github
 
